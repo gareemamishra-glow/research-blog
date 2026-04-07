@@ -1,0 +1,39 @@
+{{ define "main" }}
+<div class="container page-wrap">
+  <div class="page-header">
+    <h1>Projects</h1>
+    <p>A ledger of everything we're building, exploring, and archiving.</p>
+  </div>
+
+  {{ $pages := .Pages }}
+  {{ $allTags := slice }}
+  {{ range $pages }}{{ range .Params.tags }}{{ $allTags = $allTags | append . }}{{ end }}{{ end }}
+  {{ $uniqueTags := uniq $allTags | sort }}
+
+  <div class="filter-row" id="projects-filter">
+    <input type="text" class="filter-search" placeholder="Search projects...">
+    <button class="filter-btn active" data-filter="all">All</button>
+    {{ range $uniqueTags }}
+    <button class="filter-btn" data-filter="{{ . }}">{{ . }}</button>
+    {{ end }}
+  </div>
+
+  <div class="card-grid card-grid-3" id="projects-grid">
+    {{ range $pages }}
+    <a href="{{ .RelPermalink }}" class="card"
+       data-tags="{{ delimit .Params.tags "," | lower }}"
+       data-title="{{ .Title | lower }}">
+      <h3 class="project-card-title">{{ .Title }}</h3>
+      {{ with .Params.status }}
+        {{ $sc := "badge-archived" }}{{ $sl := "Archived" }}
+        {{ if eq . "active" }}{{ $sc = "badge-active" }}{{ $sl = "Active" }}{{ end }}
+        {{ if eq . "in-progress" }}{{ $sc = "badge-progress" }}{{ $sl = "In Progress" }}{{ end }}
+        <span class="badge {{ $sc }}">{{ $sl }}</span>
+      {{ end }}
+      <p class="project-card-desc">{{ .Params.description | default .Summary }}</p>
+      {{ with .Params.tags }}<div class="tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

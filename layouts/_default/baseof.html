@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ block "title" . }}{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="{{ "/" | relURL }}" class="nav-brand">
+        <img src="{{ "img/Mstack Blue Logo.png" | relURL }}" alt="MSTACK">
+        <span class="nav-brand-sub">open</span>
+      </a>
+      <ul class="nav-links">
+        {{ $cur := . }}
+        {{ range .Site.Menus.main }}
+        <li>
+          <a href="{{ .URL }}"
+             class="{{ if or ($cur.IsMenuCurrent "main" .) ($cur.HasMenuCurrent "main" .) }}active{{ end }}">
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </nav>
+
+  {{ block "main" . }}{{ end }}
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© {{ now.Year }} {{ .Site.Title }}</span>
+      <div class="footer-links">
+        {{ with .Site.Params.githubURL }}<a href="{{ . }}" target="_blank" rel="noopener">GitHub</a>{{ end }}
+        {{ with .Site.Params.websiteURL }}<a href="{{ . }}" target="_blank" rel="noopener">{{ $.Site.Params.websiteName | default "Website" }}</a>{{ end }}
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ "js/filter.js" | relURL }}"></script>
+</body>
+</html>

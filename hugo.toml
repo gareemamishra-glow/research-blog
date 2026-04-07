@@ -1,0 +1,30 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-us'
+title = 'Open MSTACK'
+
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 12
+
+[params]
+  description    = "A public ledger of our open-source work, experiments, and learnings."
+  heroTitle      = "Open MSTACK"
+  heroSubtitle   = "A public ledger of our open-source work, experiments, and learnings."
+  githubURL      = "https://github.com"
+  websiteURL     = "https://mstack.ai"
+  websiteName    = "mstack.ai"
+
+[taxonomies]
+  tag      = "tags"
+  category = "categories"
+
+[menu]
+  [[menu.main]]
+    name   = "Projects"
+    url    = "/projects/"
+    weight = 1
+  [[menu.main]]
+    name   = "Blog"
+    url    = "/blog/"
+    weight = 2

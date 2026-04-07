@@ -1,0 +1,63 @@
+{{ define "main" }}
+<div class="container">
+
+  {{/* Hero */}}
+  <section class="hero">
+    <h1>{{ .Site.Params.heroTitle | default .Site.Title }}</h1>
+    <p>{{ .Site.Params.heroSubtitle }}</p>
+    <div class="hero-actions">
+      <a href="{{ "/projects/" | relURL }}" class="btn btn-primary">Explore Projects →</a>
+      <a href="{{ "/blog/" | relURL }}" class="btn btn-secondary">Read Blog</a>
+    </div>
+  </section>
+
+  {{/* Featured Projects */}}
+  {{ $projects := where .Site.RegularPages "Section" "projects" }}
+  {{ $featured := where $projects ".Params.featured" true }}
+  {{ if $featured }}
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title"><span style="color:var(--yellow)">📁</span> Featured Projects</h2>
+      <a href="{{ "/projects/" | relURL }}" class="section-link">View all →</a>
+    </div>
+    <div class="card-grid card-grid-2">
+      {{ range first 2 $featured }}
+      <a href="{{ .RelPermalink }}" class="card">
+        <h3 class="project-card-title">{{ .Title }}</h3>
+        {{ with .Params.status }}
+          {{ $sc := "badge-archived" }}{{ $sl := "Archived" }}
+          {{ if eq . "active" }}{{ $sc = "badge-active" }}{{ $sl = "Active" }}{{ end }}
+          {{ if eq . "in-progress" }}{{ $sc = "badge-progress" }}{{ $sl = "In Progress" }}{{ end }}
+          <span class="badge {{ $sc }}">{{ $sl }}</span>
+        {{ end }}
+        <p class="project-card-desc">{{ .Params.description | default .Summary }}</p>
+        {{ with .Params.tags }}<div class="tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* Recent Blog Posts */}}
+  {{ $posts := where .Site.RegularPages "Section" "blog" }}
+  {{ if $posts }}
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title"><span style="color:var(--yellow)">✍️</span> Recent Posts</h2>
+      <a href="{{ "/blog/" | relURL }}" class="section-link">View all →</a>
+    </div>
+    <div class="card-grid card-grid-3">
+      {{ range first 3 $posts }}
+      <a href="{{ .RelPermalink }}" class="card">
+        <div class="blog-card-meta">{{ .Date.Format "2006-01-02" }} · {{ .ReadingTime }} min</div>
+        <h3 class="blog-card-title">{{ .Title }}</h3>
+        <p class="blog-card-desc">{{ .Params.description | default .Summary }}</p>
+        {{ with .Params.tags }}<div class="tags">{{ range . }}<span class="tag">{{ . }}</span>{{ end }}</div>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+</div>
+{{ end }}
