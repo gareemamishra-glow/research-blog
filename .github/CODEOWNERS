@@ -1,0 +1,7 @@
+# All blog posts must be reviewed by a maintainer
+# Add more GitHub usernames below separated by spaces to allow others to approve
+content/posts/ @gareemamishra-glow
+
+# Site config changes require maintainer review
+hugo.toml @gareemamishra-glow
+.github/ @gareemamishra-glow

@@ -1,30 +1,48 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-us'
-title = 'Open MSTACK'
-
-enableRobotsTXT = true
-
-[pagination]
-  pagerSize = 12
+baseURL = "https://gareemamishra-glow.github.io/research-blog/"
+languageCode = "en-us"
+title = "Research Blog"
+theme = "PaperMod"
+paginate = 10
 
 [params]
-  description    = "A public ledger of our open-source work, experiments, and learnings."
-  heroTitle      = "Open MSTACK"
-  heroSubtitle   = "A public ledger of our open-source work, experiments, and learnings."
-  githubURL      = "https://github.com"
-  websiteURL     = "https://mstack.ai"
-  websiteName    = "mstack.ai"
+  env = "production"
+  title = "Research Blog"
+  description = "Open research, papers and technical articles"
+  author = "Research Team"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = false
+  defaultTheme = "auto"
 
-[taxonomies]
-  tag      = "tags"
-  category = "categories"
+[params.homeInfoParams]
+  Title = "Research Blog"
+  Content = "An open platform for research papers, technical articles and engineering insights. Submit your post via Pull Request."
+
+[[params.socialIcons]]
+  name = "github"
+  url = "https://github.com/gareemamishra-glow/research-blog"
 
 [menu]
   [[menu.main]]
-    name   = "Projects"
-    url    = "/projects/"
+    name = "Posts"
+    url = "/posts/"
     weight = 1
   [[menu.main]]
-    name   = "Blog"
-    url    = "/blog/"
+    name = "Tags"
+    url = "/tags/"
     weight = 2
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+  [[menu.main]]
+    name = "Submit a Post"
+    url = "https://github.com/gareemamishra-glow/research-blog/blob/main/CONTRIBUTING.md"
+    weight = 4
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
