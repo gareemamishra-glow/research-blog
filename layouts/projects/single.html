@@ -1,6 +1,6 @@
 {{ define "main" }}
 <div class="article-wrap">
-  <a href="{{ "/projects/" | relURL }}" class="article-back">← Projects</a>
+  <a href="{{ "projects" | relURL }}" class="article-back">← Projects</a>
   {{ with .Params.status }}
     {{ $sc := "badge-archived" }}{{ $sl := "Archived" }}
     {{ if eq . "active" }}{{ $sc = "badge-active" }}{{ $sl = "Active" }}{{ end }}

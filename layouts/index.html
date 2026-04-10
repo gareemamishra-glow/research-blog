@@ -6,8 +6,8 @@
     <h1>{{ .Site.Params.heroTitle | default .Site.Title }}</h1>
     <p>{{ .Site.Params.heroSubtitle }}</p>
     <div class="hero-actions">
-      <a href="{{ "/projects/" | relURL }}" class="btn btn-primary">Explore Projects →</a>
-      <a href="{{ "/blog/" | relURL }}" class="btn btn-secondary">Read Blog</a>
+      <a href="{{ "projects" | relURL }}" class="btn btn-primary">Explore Projects →</a>
+      <a href="{{ "blog" | relURL }}" class="btn btn-secondary">Read Blog</a>
     </div>
   </section>
 
@@ -18,7 +18,7 @@
   <section class="section">
     <div class="section-header">
       <h2 class="section-title"><span style="color:var(--yellow)">📁</span> Featured Projects</h2>
-      <a href="{{ "/projects/" | relURL }}" class="section-link">View all →</a>
+      <a href="{{ "projects" | relURL }}" class="section-link">View all →</a>
     </div>
     <div class="card-grid card-grid-2">
       {{ range first 2 $featured }}
@@ -44,7 +44,7 @@
   <section class="section">
     <div class="section-header">
       <h2 class="section-title"><span style="color:var(--yellow)">✍️</span> Recent Posts</h2>
-      <a href="{{ "/blog/" | relURL }}" class="section-link">View all →</a>
+      <a href="{{ "blog" | relURL }}" class="section-link">View all →</a>
     </div>
     <div class="card-grid card-grid-3">
       {{ range first 3 $posts }}
